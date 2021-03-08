@@ -1,12 +1,18 @@
 package com.hgvicban.parser;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class EmojiJsonParser {
+
+    private static final Gson gson = new Gson();
 
     String readFile (String fileName) {
         StringBuilder result = new StringBuilder();
@@ -25,8 +31,11 @@ public class EmojiJsonParser {
         return result.toString();
     }
 
-    Map<String, String[]> parse(String fileName) {
-        return new HashMap<>();
+    Map<String, List<String>> parse(String fileName) {
+        String emojiJsonString = readFile(fileName);
+
+        Type typeOfHashMap = new TypeToken<Map<String, List<String>>>(){}.getType();
+        return gson.fromJson(emojiJsonString, typeOfHashMap);
     }
 
 }
