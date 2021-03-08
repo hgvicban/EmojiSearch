@@ -1,4 +1,4 @@
-package com.hgvicban.emojisearch;
+package com.hgvicban.parser;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
