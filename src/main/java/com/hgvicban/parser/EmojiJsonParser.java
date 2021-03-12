@@ -6,9 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class EmojiJsonParser {
 
@@ -36,6 +34,26 @@ public class EmojiJsonParser {
 
         Type typeOfHashMap = new TypeToken<Map<String, List<String>>>(){}.getType();
         return gson.fromJson(emojiJsonString, typeOfHashMap);
+    }
+
+    Map<String, List<String>> reverseMap(Map<String, List<String>> inputMap) {
+
+        Map<String, List<String>> result = new HashMap<>();
+        for (Map.Entry<String, List<String>> pair : inputMap.entrySet()) {
+
+            List<String> wordList = pair.getValue();
+            for (String word : wordList) {
+                if (result.containsKey(word)) {
+                    result.get(word).add(pair.getKey());
+                } else {
+                    List<String> tmpList = new ArrayList<>();
+                    tmpList.add(pair.getKey());
+                    result.put(word, tmpList);
+                }
+            }
+        }
+
+        return result;
     }
 
 }
