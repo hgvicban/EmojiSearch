@@ -57,10 +57,10 @@ class EmojiJsonParserTest {
     @Test
     void parserShouldInverseMap() {
         String filename = "emoji-en-US-subset.json";
-        Map<String, List<String>> map = parser.parse(filename);
+        Map<String, List<String>> emojiJsonMap = parser.parse(filename);
 
-        Map<String, List<String>> result = parser.reverseMap(map);
+        Map<String, List<String>> keywordMap = parser.groupByKeyword(emojiJsonMap);
 
-        assertEquals(inverseEmojiJsonMap, result);
+        assertEquals(inverseEmojiJsonMap, keywordMap);
     }
 }

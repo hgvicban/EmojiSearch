@@ -29,14 +29,14 @@ public class EmojiJsonParser {
         return result.toString();
     }
 
-    Map<String, List<String>> parse(String fileName) {
+    public Map<String, List<String>> parse(String fileName) {
         String emojiJsonString = readFile(fileName);
 
         Type typeOfHashMap = new TypeToken<Map<String, List<String>>>(){}.getType();
         return gson.fromJson(emojiJsonString, typeOfHashMap);
     }
 
-    Map<String, List<String>> reverseMap(Map<String, List<String>> inputMap) {
+    public Map<String, List<String>> groupByKeyword(Map<String, List<String>> inputMap) {
 
         Map<String, List<String>> result = new HashMap<>();
         for (Map.Entry<String, List<String>> pair : inputMap.entrySet()) {
