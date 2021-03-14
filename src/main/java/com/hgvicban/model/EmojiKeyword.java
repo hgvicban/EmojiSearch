@@ -1,9 +1,7 @@
 package com.hgvicban.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "emojikeyword")
@@ -13,22 +11,24 @@ public class EmojiKeyword {
     @Column(name = "keyword")
     private String keyword;
 
-    @Column(name = "emoji")
-    private String emoji;
+    @ElementCollection
+    @CollectionTable(name="emojikeyword_emojis", joinColumns=@JoinColumn(name="emojikeyword_keyword"))
+    @Column(name = "emojis")
+    private List<String> emojis;
 
     protected EmojiKeyword() {
     }
 
-    public EmojiKeyword(String keyword, String emoji) {
+    public EmojiKeyword(String keyword, List<String> emojis) {
         this.keyword = keyword;
-        this.emoji = emoji;
+        this.emojis = emojis;
     }
 
     @Override
     public String toString() {
         return "EmojiKeyword{" +
                 "keyword='" + keyword + '\'' +
-                ", emoji='" + emoji + '\'' +
+                ", emojis='" + emojis + '\'' +
                 '}';
     }
 
@@ -40,11 +40,11 @@ public class EmojiKeyword {
         this.keyword = keyword;
     }
 
-    public String getEmoji() {
-        return emoji;
+    public List<String> getEmojis() {
+        return emojis;
     }
 
-    public void setEmoji(String emoji) {
-        this.emoji = emoji;
+    public void setEmojis(List<String> emoji) {
+        this.emojis = emoji;
     }
 }
