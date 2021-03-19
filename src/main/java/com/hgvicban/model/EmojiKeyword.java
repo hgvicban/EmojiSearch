@@ -1,6 +1,7 @@
 package com.hgvicban.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,10 +12,8 @@ public class EmojiKeyword {
     @Column(name = "keyword")
     private String keyword;
 
-    @ElementCollection
-    @CollectionTable(name="emojikeyword_emojis", joinColumns=@JoinColumn(name="emojikeyword_keyword"))
-    @Column(name = "emojis")
-    private List<String> emojis;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> emojis = new ArrayList<>();
 
     protected EmojiKeyword() {
     }
